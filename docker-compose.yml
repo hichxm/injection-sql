@@ -4,7 +4,6 @@ networks:
   back:
 
 services:
-  
   app:
     build: .
     ports:
@@ -36,3 +35,5 @@ services:
     restart: always
     ports:
       - 8080:8080
+    networks:
+     - back
