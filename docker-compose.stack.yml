@@ -1,0 +1,41 @@
+version: '3.1'
+
+networks:
+  back:
+
+services:
+  app:
+    image: hichxm/injection-sql:latest
+    ports:
+      - 80:80
+    depends_on:
+      - database
+    environment:
+      DB_PASSWORD: "ROOT password HAHA"
+      DB_USERNAME: "root"
+      DB_HOST: "database"
+      DB_DATABASE: "database_test"
+    networks:
+      - back
+
+  database:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    volumes:
+      - ./seeds/:/docker-entrypoint-initdb.d/
+    environment:
+      MYSQL_ROOT_PASSWORD: "ROOT password HAHA"
+      MYSQL_DATABASE: "database_test"
+    networks:
+     - back
+  
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
+    networks:
+     - back
