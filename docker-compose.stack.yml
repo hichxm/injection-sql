@@ -23,7 +23,7 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     volumes:
-      - seeds/:/docker-entrypoint-initdb.d/
+      - "./seeds/:/docker-entrypoint-initdb.d/"
     deploy:
       placement:
         constraints:
