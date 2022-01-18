@@ -24,6 +24,10 @@ services:
     restart: always
     volumes:
       - ./seeds/:/docker-entrypoint-initdb.d/
+    deploy:
+      placement:
+        constraints:
+          - node.role==manager
     environment:
       MYSQL_ROOT_PASSWORD: "ROOT password HAHA"
       MYSQL_DATABASE: "database_test"
